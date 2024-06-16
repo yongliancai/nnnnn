@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-app.use(express.static("__dirname")); // 假设你的前端文件放在 'public' 目录下
+app.use(express.static("public")); // 假设你的前端文件放在 'public' 目录下
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
