@@ -1,0 +1,62 @@
+
+#chatButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 30px 20px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+#chatWindow {
+    display: none;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    max-height: 400px; /* 或者你希望的最大高度 */
+    overflow-y: auto; /* 显示垂直滚动条 */
+    overflow-x: hidden; /* 隐藏水平滚动条 */
+}
+
+#mytext {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+}
+
+.message {
+    margin-bottom: 12px;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.user-message {
+    text-align: right;
+}
+
+.bot-message {
+    text-align: left;
+}
+
+
+.bg-custom-green {
+    background-color: #4CAF50 !important; /* 綠色 */
+}
+
+.bg-custom-yellow {
+    background-color: #FFEB3B !important; /* 黃色 */
+}
+
+.bg-custom-red {
+    background-color: #F44336 !important; /* 紅色 */
+}
+
+

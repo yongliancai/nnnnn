@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>EOPA3</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+        <script src="https://unpkg.com/mp3-mediarecorder"></script>
+    
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+    
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+
+    <h1 class="text-center">EPOA3</h1>
+    <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="nav-link">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About us</a>
+                    </li>
+                    <li class="nav-item dropdown" id="userDropdown" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            登入/登出
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#" id="logoutBtn">登出</a>
+                        </div>
+                    </li>
+                    <li class="nav-item" id="loginBtn">
+                        <a class="nav-link" href="index.html">登入</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid"></div>
+    <button id="chatButton" class="btn btn-primary">ask me</button>
+    <div id="chatWindow">
+        <div id="chatHistory"></div>   
+        <form id="chat-form">
+            <input type="text" id="chatInput" placeholder="Type your message here...">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0">
+                <div id="sidebar" class="collapse collapse-horizontal">
+                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                        <a href="introduction.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Introduction</span> </a>
+
+                        <a href="body.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-film"></i> <span>Body</span></a>
+                        <a href="conclusion.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-film"></i> <span>Conclusion</span></a>
+                        <a href="slide.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-heart"></i> <span>Slide Design</span></a>
+                        <a href="describing.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bricks"></i> <span>Describing Visuals</span></a>
+                        <a href="deportment.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-clock"></i> <span>Deportment</span></a>
+                        <a href="common.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-archive"></i> <span>Common Mistakes</span></a>
+                        <a href="faqs.html" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-gear"></i> <span>FAQS</span></a>
+                    </div>
+                </div>
+            </div>
+            <main class="col ps-md-2 pt-2">
+                <header class="masthead text-center text-white" style="background-image: url('assets/img/40.png'); background-size: cover; background-position: center;">
+                    <div class="masthead-content">
+                        <div class="container px-5">
+                            <h1 class="masthead-heading mb-0">8.FAQS</h1>
+                        </div>
+                    </div>
+                </header>
+
+                <button data-bs-toggle="collapse" data-bs-target="#1">
+                    Key words and synonyms are in green <br />
+                    關鍵字和同義詞是綠色的<br />
+                </button>
+
+                <div id="1" class="collapse">
+                    answers is here
+                </div><br />
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#2">
+                    What are the common/usual mistakes/errors in presentations?<br />
+                    在做簡報時常見的錯誤是什麼?<br />
+                </button>
+
+                <div id="2" class="collapse">
+                    answers is here
+                </div><br />
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#3">
+                    How do I start/begin a presentation/introduction?<br />
+                    我該如何開始簡報/前言?<br />
+                </button>
+                <div id="3" class="collapse">
+                    answers is here
+                </div><br />
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#4">
+                    What do I say/talk about in an introduction/start/beginning?<br />
+                    我在前言時應該說什麼?<br />
+                </button>
+                <div id="4" class="collapse">
+                    answers is here
+                </div><br />
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#5">
+                    What sentences/phrases/words should I use in an<br />
+                    introduction/start/beginning?<br />
+                    我在前言時我該使用哪些句子?<br />
+                </button>
+                <div id="5" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#6">
+                    How do I start/begin the main part/body/details?<br />
+                    我該如何開始簡報的主要部分/內容/細節?<br />
+                </button>
+                <div id="6" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#7">
+                    What do I say/talk about in the main part/body/details?<br />
+                    我在報告簡報的主要部分/內容/細節時應該說什麼?<br />
+                </button>
+                <div id="7" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#8">
+                    How do I describe/talk about/discuss graphs/charts/tables/figures?<br />
+                    我如何描述圖表/表格?<br />
+                </button>
+                <div id="8" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#9">
+                    How do I describe/talk about/discuss pictures/photos?<br />
+                    我如何描述圖片?<br />
+                </button>
+                <div id="9" class="collapse">
+                    answers is here
+                </div><br />
+
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#10">
+                    How do I describe/talk about/discuss visuals?<br />
+                    我如何描述視覺效果?<br />
+                </button>
+                <div id="10" class="collapse">
+                    answers is here
+                </div><br />
+
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#11">
+                    How do I design/draw/make a slide/the background/PowerPoint/PPT/presentation?<br />
+                    我如何設計投影片/背景/圖片?<br />
+                </button>
+                <div id="11" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#12">
+                    Do you know how to use your voice/sound and body language/body/expressions?<br />
+                    你知道如何使用你的聲音和肢體語言嗎?<br />
+                </button>
+                <div id="12" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#13">
+                    How do I start/begin/talk about/discuss the conclusion/ending/final part?<br />
+                    我該如何開始結論?<br />
+                </button>
+                <div id="13" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#14">
+                    What do I say/talk about/discuss in the conclusion/ending/final part?<br />
+                    我在結論時應該說什麼?<br />
+                </button>
+                <div id="14" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#15">
+                    What sentences/phrases/words should I use in the conclusion/ending/final part?<br />
+                    我在報告結論時我應該要用哪些句子?<br />
+                </button>
+                <div id="15" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#16">
+                    How should I stand?<br />
+                    我應該要怎麼站?<br />
+                </button>
+                <div id="16" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#17">
+                    How should I speak/use my voice?<br />
+                    我應該要怎麼說?<br />
+                </button>
+                <div id="17" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#18">
+                    What should I look at/watch/pay attention to?<br />
+                    我應該要看哪裡?<br />
+                </button>
+                <div id="18" class="collapse">
+                    answers is here
+                </div><br />
+
+                <button class="mt-3" data-bs-toggle="collapse" data-bs-target="#19">
+                    What should I do if I feel nervous/anxious?<br />
+                    如果我感到緊張/焦慮時我應該要怎麼做?<br />
+                </button>
+                <div id="19" class="collapse">
+                    answers is here
+                </div><br />
+            </div>
+        </div>
+    </div>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">版權所有 &copy; EOPA3 2024</p>
+        </div>
+    </footer>
+    <script src="exScripts.js"></script>
+</body>
+
+</html>

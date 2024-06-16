@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loginRegister</title>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="login-form" class="form-container">
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
+      </div>
+    
+      <!-- Registration form -->
+      <div id="register-form" class="form-container" style="display: none;">
+        <h2>Register</h2>
+        <input type="email" id="register-email" placeholder="Email">
+        <input type="password" id="register-password" placeholder="Password">
+        <button onclick="register()">Register</button>
+        <p>Already have an account? <a href="#"
+            onclick="document.getElementById('login-form').style.display = 'block'; document.getElementById('register-form').style.display = 'none';">Login</a>
+        </p>
+      </div>
+
+
+      <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAD1KMSpY0bYfOD1LkgqZOxJGb9mln4FnA",
+            authDomain: "ncku-89f9b.firebaseapp.com",
+            databaseURL: "https://ncku-89f9b-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ncku-89f9b",
+            storageBucket: "ncku-89f9b.appspot.com",
+            messagingSenderId: "512584605700",
+            appId: "1:512584605700:web:fc6feee0164e5126241551",
+            measurementId: "G-5347400104"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        // Get a reference to the database service
+    var database = firebase.database();
+
+    function register() {
+    var email = document.getElementById('register-email').value;
+    var password = document.getElementById('register-password').value;
+    var username = document.getElementById('register-username').value;
+
+    // 检查用户名是否已存在
+    var db = firebase.database();
+    db.ref('users/' + username).once('value').then(function(snapshot) {
+        if (snapshot.exists()) {
+            // 用户名已存在
+            console.log('Username already exists!');
+            alert('The username is already taken, please choose another one.');
+        } else {
+            // 用户名可用，继续注册
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(function(userCredential) {
+                    var user = userCredential.user;
+                    console.log("User registered:", user);
+
+                    // 使用用户名创建一个用户节点
+                    var userRef = db.ref("users/" + username);
+                    userRef.set({
+                        email: email,
+                        password: password,
+                        username: username
+                    }).then(function() {
+                        console.log("User node created in the database with username");
+
+                        // 设置用户的显示名称为用户名
+                        user.updateProfile({
+                            displayName: username
+                        }).then(function() {
+                            console.log("User displayName set successfully:", username);
+
+                            // 注册成功后自动登录
+                            firebase.auth().signInWithEmailAndPassword(email, password)
+                                .then(function(userCredential) {
+                                    // User logged in successfully
+                                    var user = userCredential.user;
+                                    console.log("User logged in:", user);
+
+                                    // 提示注册成功，即将自动登录
+                                    alert("註冊成功，即將自動登入");
+                                    window.location.href = "homepage.html";
+                                })
+                                .catch(function(error) {
+                                    // Error occurred during login after registration
+                                    var errorMessage = error.message;
+                                    console.log("Login error after registration:", errorMessage);
+                                    alert("登录失败：" + errorMessage);
+                                });
+                        }).catch(function(error) {
+                            console.log("Error setting displayName:", error);
+                        });
+                    }).catch(function(error) {
+                        console.log("Error creating user node in the database:", error);
+                    });
+                })
+                .catch(function(error) {
+                    var errorMessage = error.message;
+                    console.log("Registration error:", errorMessage);
+                    alert("註冊失败：" + errorMessage);
+                });
+        }
+    });
+}
+
+
+
+    function login() {
+        var email = document.getElementById('login-email').value;
+        var password = document.getElementById('login-password').value;
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function (userCredential) {
+        // 用户登录成功
+        var user = userCredential.user;
+            console.log("User logged in:", user);
+            window.location.href = "homepage.html";
+            alert("登入成功");
+
+        })
+        .catch(function (error) {
+        // 登录过程中出错
+            var errorMessage = error.message;
+            console.log("Login error:", errorMessage);
+            alert("登入失敗，帳號或密碼有誤");
+        });
+    }
+
+
+    // Function to show registration form
+    function showRegisterForm() {
+        document.getElementById('register-form').style.display = "block";
+        document.getElementById('login-form').style.display = "none";
+    }
+
+      </script>
+</body>
+</html>
